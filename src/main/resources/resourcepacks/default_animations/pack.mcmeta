@@ -1,0 +1,7 @@
+{
+  "pack": {
+    "description": "The default mining and placing animations",
+    "min_format": 75,
+    "max_format": 2048
+  }
+}

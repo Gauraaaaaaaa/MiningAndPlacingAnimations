@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Using the official (non-26.2) version instead?
+    url: https://github.com/Gauraaaaaaaa/MiningAndPlacingAnimations/issues
+    about: Bugs in Gaura's official releases (not this unofficial port) belong on the original project.

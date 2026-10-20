@@ -1,0 +1,73 @@
+name: Bug report (26.2 port)
+description: Something is wrong with the unofficial Minecraft 26.2 port of Mining & Placing Animations
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! This is the issue tracker for the **unofficial 26.2 port** only.
+        Please **don't** report bugs from this port to the original project; its author doesn't support it.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the problem. If you can, say what you expected to happen instead.
+      placeholder: e.g. "When I mine a stone block, it disappears for a moment before the animation starts."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: How can it be reproduced?
+      description: The steps to make it happen again.
+      placeholder: |
+        1. Place a block of ...
+        2. Start mining it with ...
+        3. ...
+    validations:
+      required: true
+
+  - type: input
+    id: mod-version
+    attributes:
+      label: Mod version
+      description: Shown in the jar's file name, e.g. 2.0.0+26.2
+    validations:
+      required: true
+
+  - type: input
+    id: versions
+    attributes:
+      label: Minecraft, Fabric Loader and Fabric API versions
+      placeholder: e.g. Minecraft 26.2, Fabric Loader 0.19.5, Fabric API 0.161.0+26.2
+    validations:
+      required: true
+
+  - type: textarea
+    id: mods
+    attributes:
+      label: Other mods and resource packs
+      description: Especially Sodium, Iris (and your shader pack), or anything else that changes rendering. If you have many mods, try to reproduce with only this mod and Fabric API.
+    validations:
+      required: false
+
+  - type: textarea
+    id: log
+    attributes:
+      label: Log or crash report
+      description: |
+        Drag and drop `logs/latest.log` from your Minecraft folder here, or the file from `crash-reports/` if the game crashed.
+        You can also upload it to https://mclo.gs and paste the link.
+    validations:
+      required: false
+
+  - type: textarea
+    id: media
+    attributes:
+      label: Screenshots or video
+      description: Optional, but very helpful for animation or rendering problems.
+    validations:
+      required: false

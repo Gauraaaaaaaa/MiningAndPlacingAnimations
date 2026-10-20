@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "mining_and_placing_animations",
+  "version": "${version}",
+  "name": "Mining & Placing Animations (Unofficial 26.2 Port)",
+  "description": "Adds customizable animations to blocks when mining and placing! (Mining Quakes successor) Unofficial Minecraft 26.2 port of Gaura's mod; not supported by the original author.",
+  "authors": [
+    "Gaura"
+  ],
+  "contributors": [
+    "signup098ezxs (26.2 port)"
+  ],
+  "contact": {
+    "homepage": "https://github.com/signup098ezxs/MiningAndPlacingAnimations",
+    "sources": "https://github.com/signup098ezxs/MiningAndPlacingAnimations",
+    "issues": "https://github.com/signup098ezxs/MiningAndPlacingAnimations/issues"
+  },
+  "license": "GPL-3.0-or-later",
+  "icon": "assets/mining_and_placing_animations/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.gaura.mining_and_placing_animations.fabric.MiningAndPlacingAnimationsFabric"
+    ]
+  },
+  "mixins": [
+    "mining_and_placing_animations.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "~26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}

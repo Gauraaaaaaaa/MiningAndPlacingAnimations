@@ -1,0 +1,63 @@
+# On every push to the 26.2 branch: if there is no GitHub Release yet for the
+# mod_version in gradle.properties, build the mod and publish one with the jar
+# attached (much easier to download than workflow artifacts).
+# If the release already exists, its notes are refreshed from .github/RELEASE_NOTES.md.
+# To publish an update, bump mod_version in gradle.properties and push.
+
+name: release
+on:
+  push:
+    branches:
+      - '26.2'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: check whether this version is already released
+        id: version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(grep '^mod_version=' gradle.properties | cut -d= -f2)
+          echo "tag=v$version" >> "$GITHUB_OUTPUT"
+          if gh release view "v$version" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: refresh notes of the existing release
+        if: steps.version.outputs.exists == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release edit "${{ steps.version.outputs.tag }}" --notes-file .github/RELEASE_NOTES.md
+      - name: validate gradle wrapper
+        if: steps.version.outputs.exists == 'false'
+        uses: gradle/actions/wrapper-validation@v6
+      - name: setup jdk
+        if: steps.version.outputs.exists == 'false'
+        uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'microsoft'
+      - name: make gradle wrapper executable
+        if: steps.version.outputs.exists == 'false'
+        run: chmod +x ./gradlew
+      - name: build
+        if: steps.version.outputs.exists == 'false'
+        run: ./gradlew build
+      - name: publish release
+        if: steps.version.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="${{ steps.version.outputs.tag }}"
+          jar=$(ls build/libs/*.jar | grep -v -- '-sources')
+          gh release create "$tag" $jar --target "$GITHUB_SHA" --latest \
+            --title "Mining & Placing Animations ${tag#v} (unofficial 26.2 port)" \
+            --notes-file .github/RELEASE_NOTES.md

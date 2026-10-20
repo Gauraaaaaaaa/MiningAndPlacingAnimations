@@ -1,0 +1,20 @@
+{
+  "required": true,
+  "package": "com.gaura.mining_and_placing_animations.mixin",
+  "plugin": "com.gaura.mining_and_placing_animations.mixin.MixinPlugin",
+  "compatibilityLevel": "JAVA_25",
+  "minVersion": "0.8",
+  "client": [
+    "BlockEntityRenderDispatcherMixin",
+    "BlockItemMixin",
+    "LevelRendererMixin",
+    "MultiPlayerGameModeMixin",
+    "indigo.AltModelBlockRendererImplMixin",
+    "iris.ShadowRendererMixin",
+    "sodium.AbstractBlockRenderContextMixin",
+    "sodium.BlockRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
